@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1177</width>
+    <height>654</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ActiveDataSet</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0" rowspan="3">
+     <widget class="QListWidget" name="dataList">
+      <property name="minimumSize">
+       <size>
+        <width>231</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>231</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="3">
+     <widget class="QGraphicsView" name="dataViewer"/>
+    </item>
+    <item row="0" column="2" colspan="2">
+     <widget class="QListWidget" name="targetList">
+      <property name="minimumSize">
+       <size>
+        <width>151</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>151</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="rmTargetButton">
+      <property name="minimumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QPushButton" name="undoButton">
+      <property name="minimumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Undo</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="editButton">
+      <property name="minimumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Edit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QPushButton" name="deleteButton">
+      <property name="minimumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>71</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Delete Img</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1177</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLoad">
+    <property name="title">
+     <string>Load</string>
+    </property>
+    <addaction name="loadAOAction"/>
+    <addaction name="actionLoadClasses"/>
+    <addaction name="actionFrom_Video"/>
+   </widget>
+   <widget class="QMenu" name="menuSave">
+    <property name="title">
+     <string>Save</string>
+    </property>
+    <addaction name="actionTarget_Modifications"/>
+    <addaction name="actionView_history"/>
+    <addaction name="actionActive_data_to"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionData_spliter"/>
+    <addaction name="actionRename"/>
+   </widget>
+   <addaction name="menuLoad"/>
+   <addaction name="menuSave"/>
+   <addaction name="menuTools"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="loadAOAction">
+   <property name="text">
+    <string>Active Learning outputs</string>
+   </property>
+  </action>
+  <action name="actionTarget_Modifications">
+   <property name="text">
+    <string>Target Modifications</string>
+   </property>
+  </action>
+  <action name="actionData_spliter">
+   <property name="text">
+    <string>Data spliter</string>
+   </property>
+  </action>
+  <action name="actionView_history">
+   <property name="text">
+    <string>View change history</string>
+   </property>
+  </action>
+  <action name="actionRename">
+   <property name="text">
+    <string>Rename all data</string>
+   </property>
+  </action>
+  <action name="actionLoadClasses">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Classes</string>
+   </property>
+  </action>
+  <action name="actionActive_data_to">
+   <property name="text">
+    <string>Active data to ..</string>
+   </property>
+  </action>
+  <action name="actionFrom_Video">
+   <property name="text">
+    <string>From Video</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
