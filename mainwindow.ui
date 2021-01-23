@@ -164,7 +164,6 @@
    <addaction name="menuSave"/>
    <addaction name="menuTools"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="loadAOAction">
    <property name="text">
     <string>Active Learning outputs</string>
