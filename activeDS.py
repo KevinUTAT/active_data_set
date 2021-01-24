@@ -29,6 +29,7 @@ from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBE
 from ImgScene import ImgScene
 import train_val_spliter
 import rename
+from newTask import NewTask
 # import detect
 
 
@@ -45,6 +46,10 @@ class Form(QObject):
 
         # system flags
         self.current_data_dir = "."
+
+        # new task window
+        self.taskCreated = False
+        self.newTaskWin = NewTask(ui_file='newtaskwindow.ui')
 
         # Menu actions ==================================================
         # Load ADS action
@@ -76,6 +81,9 @@ class Form(QObject):
         # renamer
         self.window.findChild(QAction, 'actionRename').\
             triggered.connect(self.run_rename)
+
+        self.window.findChild(QAction, 'actionNewTask').\
+            triggered.connect(self.new_task)
 
         # Data list =====================================================
         self.dataList = \
@@ -121,7 +129,6 @@ class Form(QObject):
         # shortcuts ====================================================
         QShortcut(QKeySequence("Ctrl+R"), self.window).activated.\
             connect(self.remove_target)
-
 
         self.window.show()
 
@@ -477,6 +484,10 @@ class Form(QObject):
         progress_bar.setWindowModality(Qt.WindowModal)
         progress_bar.setValue(progress)
         detect.run_detect_video(source_vid, progress_bar, active_thr)
+
+
+    def new_task(self):
+        self.newTaskWin.show()
 
             
 

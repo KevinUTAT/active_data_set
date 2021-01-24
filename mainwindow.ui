@@ -160,8 +160,16 @@
     <addaction name="actionData_spliter"/>
     <addaction name="actionRename"/>
    </widget>
+   <widget class="QMenu" name="menuTask">
+    <property name="title">
+     <string>Task</string>
+    </property>
+    <addaction name="actionOpenTask"/>
+    <addaction name="actionNewTask"/>
+   </widget>
    <addaction name="menuLoad"/>
    <addaction name="menuSave"/>
+   <addaction name="menuTask"/>
    <addaction name="menuTools"/>
   </widget>
   <action name="loadAOAction">
@@ -205,6 +213,16 @@
   <action name="actionFrom_Video">
    <property name="text">
     <string>From Video</string>
+   </property>
+  </action>
+  <action name="actionOpenTask">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionNewTask">
+   <property name="text">
+    <string>New</string>
    </property>
   </action>
  </widget>
