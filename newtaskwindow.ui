@@ -150,6 +150,60 @@
      <string>...</string>
     </property>
    </widget>
+   <widget class="QLabel" name="task_errmsg">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>211</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Error Msg</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="data_errmsg">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>90</y>
+      <width>211</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Error Msg</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="yaml_errmsg">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>130</y>
+      <width>211</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>7</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Error Msg</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
