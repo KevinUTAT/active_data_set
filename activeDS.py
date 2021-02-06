@@ -30,6 +30,7 @@ from ImgScene import ImgScene
 import train_val_spliter
 import rename
 from newTask import NewTask
+from task import Task
 # import detect
 
 
@@ -85,6 +86,9 @@ class Form(QObject):
         self.window.findChild(QAction, 'actionNewTask').\
             triggered.connect(self.new_task)
 
+        self.window.findChild(QAction, 'actionOpenTask').\
+            triggered.connect(self.open_task)
+
         # Data list =====================================================
         self.dataList = \
             self.window.findChild(QListWidget, 'dataList')
@@ -133,9 +137,15 @@ class Form(QObject):
         self.window.show()
 
 
-    # Load active data set
+    # Load active data set from a window
     def load_adc(self):
         self.adc_folder_dir = QFileDialog.getExistingDirectory()
+        self.load_dataset(self.adc_folder_dir)
+
+
+    # load from existing self.adc_folder_dir
+    def load_dataset(self, ds_dir):
+        self.adc_folder_dir = ds_dir
         if (not os.path.exists(self.adc_folder_dir + IMG_FOLDER)) \
             or (not os.path.exists(self.adc_folder_dir + LEBEL_FOLDER)):
             self.error_msg("Cannot find proper data in " + self.adc_folder_dir \
@@ -490,6 +500,18 @@ class Form(QObject):
         self.newTaskWin.show()
 
             
+    def open_task(self):
+        (task_dir, ext) = QFileDialog.getOpenFileName(\
+                filter="Task JSON files (*.json)")
+        self.start_task(task_dir)
+
+
+    def start_task(self, task_dir):
+        with open(task_dir, 'r') as task_file:
+            self.current_task = Task(task_file)
+        self.load_dataset(self.current_task.data_location)
+        
+        
 
 
     # Tools ++++++++++++++++++++++++++++++++++++++++++++++++++

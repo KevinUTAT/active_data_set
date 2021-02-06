@@ -1,3 +1,4 @@
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 # Intro
 This little tool is build to manage data sets for learning. It currently supports COCO style annotation and its tested with some of my YOLO projects that you can find here: [RPANet](https://github.com/KevinUTAT/RPANet), [Surviver.IO](https://github.com/KevinUTAT/surviver_dot_IO) \
 The focus of this tool is *active learning*, by providing simple work flow of editing existing annotations that maybe generated through active learning. \

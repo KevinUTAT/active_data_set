@@ -15,6 +15,8 @@ import json
 from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBEL_FOLDER
 
 
+# This is the GUI window for creating a new task. 
+# there is no actual task created here
 class NewTask(QObject):
 
     def __init__(self, ui_file, parent=None):
