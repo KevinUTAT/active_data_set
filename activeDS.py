@@ -19,8 +19,8 @@ from PySide2.QtWidgets import (QApplication, QPushButton,
                             QListView, QGraphicsScene, QGraphicsView, 
                             QProgressDialog, QShortcut)
 from PySide2.QtCore import QFile, QObject, QRectF, Qt
-from PySide2.QtGui import (QIcon, QPixmap, QImage, QCursor, QKeySequence)
-
+from PySide2.QtGui import (QIcon, QPixmap, QImage, QCursor, 
+                            QKeySequence, QBrush,  QColor)
 from PIL import Image
 import shutil
 from bbox import BBox
@@ -49,7 +49,7 @@ class Form(QObject):
         self.current_data_dir = "."
 
         # new task window
-        self.taskCreated = False
+        self.in_task = False # indicating its currently performing a task
         self.newTaskWin = NewTask(ui_file='newtaskwindow.ui')
 
         # Menu actions ==================================================
@@ -171,6 +171,9 @@ class Form(QObject):
             progress.setWindowModality(Qt.WindowModal)
         for i, dataName in enumerate(nameList):
             newItem = QtWidgets.QListWidgetItem(dataName)
+            # Mark finished data
+            if dataName in self.current_task.finished_data:
+                newItem.setBackground(QBrush(QColor("#b3b3b3")))
             
             if showThumbnail:
                 # boring img down sizing and img format converting
