@@ -172,7 +172,7 @@ class Form(QObject):
         for i, dataName in enumerate(nameList):
             newItem = QtWidgets.QListWidgetItem(dataName)
             # Mark finished data
-            if dataName in self.current_task.finished_data:
+            if self.in_task and (dataName in self.current_task.finished_data):
                 newItem.setBackground(QBrush(QColor("#b3b3b3")))
             
             if showThumbnail:
@@ -222,6 +222,11 @@ class Form(QObject):
     def load_viewer(self, highlight=-1):
         # self.viewerScene.clear()
         data_name = str(self.dataList.currentItem().text())
+        # mark as finished
+        if self.in_task:
+            self.dataList.currentItem().\
+                setBackground(QBrush(QColor("#b3b3b3")))
+            self.current_task.finish_data(data_name)
         # img_dir = self.current_data_dir + IMG_FOLDER \
         #     + '/' + data_name + '.' + IMG_EXT
         # img = QPixmap(img_dir)
@@ -510,8 +515,8 @@ class Form(QObject):
 
 
     def start_task(self, task_dir):
-        with open(task_dir, 'r') as task_file:
-            self.current_task = Task(task_file)
+        self.current_task = Task(task_dir)
+        self.in_task = True
         self.load_dataset(self.current_task.data_location)
         
         
