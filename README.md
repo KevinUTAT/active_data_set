@@ -5,6 +5,10 @@ The focus of this tool is *active learning*, by providing simple work flow of ed
 The current build supports loading a existing datasets with images and labels and allows you to edit, delete and add new annotations.\
 The tools is light weight and build with Python and PySide2 framework.
 # Change log
+### 2021-02-07
+- Task system are functioning in a bare bone manner.
+- Now task will track all of finished data so you can pick up later
+- Data background turn grey if its "finished"
 ### 2021-01-30
 - Introducing Task system. A task is annotation flow that keep track of you progress as well.
 - Add the new task window to generating a new Task
@@ -21,3 +25,25 @@ Once dependencies are installed, run the tool:
 ```
 python activeDS.py
 ```
+# How to start
+## Work with a data folder
+You will need a folder with your data organized as follow:
+```
+You_data_folder |
+                |_ images |
+                          |_ data_image_01.png
+                          |_ data_image_02.png
+                          |_ ... ...
+                |_ labels |
+                          |_ data_image_01.txt
+                          |_ data_image_02.txt
+                          |_ ... ...
+```
+Go to *Load* -> *Active learning output* to load such folder. You label are expected to be in COCO format:
+```
+<class number>, <center X>, <center Y>, <width>, <height>
+... ...
+```
+## Work with a task
+You can open a existing task by open the JSON task file by *Task* -> *Open* \
+Or start a new task using the new task wizard: *Task* -> *New*
