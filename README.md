@@ -46,4 +46,5 @@ Go to *Load* -> *Active learning output* to load such folder. You label are expe
 ```
 ## Work with a task
 You can open a existing task by open the JSON task file by *Task* -> *Open* \
-Or start a new task using the new task wizard: *Task* -> *New*
+Or start a new task using the new task wizard: *Task* -> *New* \
+When in task, opening a data will automatically mark it as *finished* and the data background turns grey. Double click a data to mark it as *unfinished* 

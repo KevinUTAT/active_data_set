@@ -25,7 +25,7 @@ from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBE
 class DataScene(object):
 
     def __init__(self, viewerScene, viewerView, targetList, \
-        ui_form, data_name='', current_data_dir=''):
+        ui_form, data_name='', current_data_dir='', cls_map={}):
         self.viewerScene = viewerScene
         self.viewerView = viewerView
         self.targetList = targetList
@@ -34,6 +34,8 @@ class DataScene(object):
         self.current_data_dir = current_data_dir
 
         self.last_cls = 0
+
+        self.cls_map = cls_map
 
         self.img_dir = self.current_data_dir + IMG_FOLDER \
             + '/' + data_name + '.' + IMG_EXT
@@ -60,7 +62,11 @@ class DataScene(object):
             else:
                 one_box.drew_in_scene(self.viewerScene, self, i)
             
-            newItem = QtWidgets.QListWidgetItem(str(one_box.cls))
+            if len(self.cls_map) >= (one_box.cls + 1):
+                cls_label = f"{str(one_box.cls)}\t{self.cls_map[one_box.cls]}"
+                newItem = QtWidgets.QListWidgetItem(cls_label)
+            else:
+                newItem = QtWidgets.QListWidgetItem(str(one_box.cls))
             self.targetList.addItem(newItem)
 
         self.viewerView.fitInView(QRectF(0, 0, w, h), Qt.KeepAspectRatio)

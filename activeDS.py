@@ -23,6 +23,7 @@ from PySide2.QtGui import (QIcon, QPixmap, QImage, QCursor,
                             QKeySequence, QBrush,  QColor)
 from PIL import Image
 import shutil
+import yaml
 from bbox import BBox
 from dataScene import DataScene
 from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBEL_FOLDER
@@ -140,12 +141,14 @@ class Form(QObject):
 
     # Load active data set from a window
     def load_adc(self):
+        self.class_map = {}
         self.adc_folder_dir = QFileDialog.getExistingDirectory()
         self.load_dataset(self.adc_folder_dir)
 
 
     # load from existing self.adc_folder_dir
     def load_dataset(self, ds_dir):
+        self.class_map = {}
         self.adc_folder_dir = ds_dir
         if (not os.path.exists(self.adc_folder_dir + IMG_FOLDER)) \
             or (not os.path.exists(self.adc_folder_dir + LEBEL_FOLDER)):
@@ -252,7 +255,7 @@ class Form(QObject):
 
         self.current_dataScene = DataScene(self.viewerScene, \
             self.viewerView, self.targetList, self, data_name, \
-            self.current_data_dir)
+            self.current_data_dir, self.class_map)
         self.viewerScene.set_dataScene(self.current_dataScene)
         # setup edit trigger (double click or edit button)
         if not self.editButton_connected:
@@ -482,6 +485,7 @@ class Form(QObject):
             shutil.move(source_label, dest_label)
 
 
+    # Deprecated. Need an outside module to work
     def get_active_from_video(self):
         (source_vid, ext) = QFileDialog.getOpenFileName(\
                 filter="Video files (*.mp4 *.avi)")
@@ -519,6 +523,16 @@ class Form(QObject):
         self.current_task = Task(task_dir)
         self.in_task = True
         self.load_dataset(self.current_task.data_location)
+        self.load_ymal(self.current_task.yaml_location)
+
+
+    def load_ymal(self, yaml_location):
+        with open(yaml_location, 'r') as yaml_file:
+            yaml_doc = yaml.full_load(yaml_file)
+        # a mapping of class names
+        self.class_map = {}
+        for i, name in enumerate(yaml_doc['names']):
+            self.class_map[i] = name
         
         
     @Slot(QtWidgets.QListWidgetItem)
