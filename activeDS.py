@@ -18,7 +18,7 @@ from PySide2.QtWidgets import (QApplication, QPushButton,
                             QMessageBox, QInputDialog, QListWidget, 
                             QListView, QGraphicsScene, QGraphicsView, 
                             QProgressDialog, QShortcut)
-from PySide2.QtCore import QFile, QObject, QRectF, Qt
+from PySide2.QtCore import QFile, QObject, QRectF, Qt, Slot
 from PySide2.QtGui import (QIcon, QPixmap, QImage, QCursor, 
                             QKeySequence, QBrush,  QColor)
 from PIL import Image
@@ -95,6 +95,7 @@ class Form(QObject):
         self.dataList.setViewMode(QListView.IconMode)
         self.dataList.setIconSize(PySide2.QtCore.QSize(128, 72))
         self.dataList.itemSelectionChanged.connect(self.load_viewer)
+        self.dataList.itemDoubleClicked.connect(self.double_click_data)
 
         # Data Viewer ===================================================
         self.viewerScene = ImgScene(self)
@@ -520,6 +521,13 @@ class Form(QObject):
         self.load_dataset(self.current_task.data_location)
         
         
+    @Slot(QtWidgets.QListWidgetItem)
+    def double_click_data(self, item):
+        if self.in_task:
+            # make the data unfinished
+            self.current_task.mark_as_unfinished(item.text())
+            # remove the visual highlight
+            item.setBackground(QBrush(QColor("#ffffff")))
 
 
     # Tools ++++++++++++++++++++++++++++++++++++++++++++++++++
