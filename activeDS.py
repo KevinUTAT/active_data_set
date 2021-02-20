@@ -418,7 +418,12 @@ class Form(QObject):
                 elif mod[3] is None:
                     lines.append(mod[2] + '\n')
                 else:
-                    lines[mod[1]] = mod[2] + '\n'
+                    if len(lines) > mod[1]:
+                        lines[mod[1]] = mod[2] + '\n'
+                    else:
+                        print("ERROR: modify line DNE:")
+                        print(mod)
+                        print(lines)
 
                 with open(label_dir, 'w') as label_file:
                     label_file.writelines(lines)

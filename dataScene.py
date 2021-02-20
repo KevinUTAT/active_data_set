@@ -93,22 +93,26 @@ class DataScene(object):
     def edit_target_class(self):
         # findout which target is selected first
         target_idx = self.targetList.currentRow()
-
+        
+        class_list = []
+        for cls_idx, cls_name in self.cls_map.items():
+            class_list.append(f"{cls_idx}-{cls_name}")
         # show a dialog
         dialog = QInputDialog()
         label_text = "Input the correct class number.\n"\
             "Please note your input will not be checked for legality"
-        text, okPressed = \
-            QInputDialog.getText(dialog, \
+        item, okPressed = \
+            QInputDialog.getItem(dialog, \
             "Edit class", \
             label_text, \
-            QLineEdit.Normal)
+            class_list, False)
         # print(text, okPressed)
-        if okPressed and text != '':
+        if okPressed and item:
             cur_bbox = label_table[self.data_name][target_idx]
             old_bbox = BBox(cur_bbox.xywh, cur_bbox.imgSizeWH, cur_bbox.cls)
-            label_table[self.data_name][target_idx].cls = int(text)
-            self.last_cls = int(text)
+            class_idx = item.split('-')[0] 
+            label_table[self.data_name][target_idx].cls = int(class_idx)
+            self.last_cls = int(class_idx)
             # log the change
             new_data = label_table[self.data_name][target_idx].to_label_str()
             # print(new_data)
