@@ -417,6 +417,12 @@ class Form(QObject):
             else:
                 with open(label_dir, 'r') as label_file:
                     lines = label_file.readlines()
+                # do some check on the label file
+                if len(lines) > 0:
+                    # the last line should end with \n
+                    if lines[-1][-1] != '\n':
+                        lines[-1] = lines[-1] + '\n'
+                    # if its an empty file, its fine
                 # remove a target (a line)
                 if mod[2] == '':
                     del lines[mod[1]]
