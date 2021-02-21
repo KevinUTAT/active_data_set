@@ -84,6 +84,12 @@ class Form(QObject):
         self.window.findChild(QAction, 'actionRename').\
             triggered.connect(self.run_rename)
 
+        # check labels
+        self.window.findChild(QAction, 'actionCheck_Labels').\
+            triggered.connect(self.check_labels_integrity)
+
+        # For task ------------------------------------------------------
+
         self.window.findChild(QAction, 'actionNewTask').\
             triggered.connect(self.new_task)
 
@@ -424,6 +430,7 @@ class Form(QObject):
                         print("ERROR: modify line DNE:")
                         print(mod)
                         print(lines)
+                        assert(False)
 
                 with open(label_dir, 'w') as label_file:
                     label_file.writelines(lines)
@@ -574,6 +581,17 @@ class Form(QObject):
                 + IMG_FOLDER + " and " + LEBEL_FOLDER)
             return
         rename.back_ward_rename(data_folder_dir)
+
+
+    def check_labels_integrity(self):
+        for label in os.listdir(self.adc_folder_dir + LEBEL_FOLDER):
+            with open(self.adc_folder_dir + LEBEL_FOLDER \
+                + "/" + label) as label_file:
+                for line in label_file:
+                    line_segs = line.split()
+                    if len(line_segs) > 5:
+                        print(f"Line error in: {label}")
+                        break
 
 
     # helpers ++++++++++++++++++++++++++++++++++++++++++++++++
