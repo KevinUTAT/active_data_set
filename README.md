@@ -4,7 +4,18 @@ This little tool is build to manage data sets for learning. It currently support
 The focus of this tool is *active learning*, by providing simple work flow of editing existing annotations that maybe generated through active learning. \
 The current build supports loading a existing datasets with images and labels and allows you to edit, delete and add new annotations.\
 The tools is light weight and build with Python and PySide2 framework.
+## Approach
+This program treats your data cautiously. \
+All your changes are saved in a data structure as changes, this allows two things:
+- You can undo you modification with ease. It just have to remove an entry in the data structure.
+- Your changes will not write to your labels only if you explicitly do so. 
 # Change log
+### 2021-03-05
+- Task system will except a yaml file for class names.
+- Re-do interface for editing target class. Now use a drop down menu if a ymal file is loaded.
+- Now you can set a default class. Simplify steps when only added one class to data set
+- Fix a bug when working with outside labels, newline are not added to the end
+- Add label integrity checker to look for bad label due to the bug above
 ### 2021-02-07
 - Task system are functioning in a bare bone manner.
 - Now task will track all of finished data so you can pick up later
@@ -29,15 +40,15 @@ python activeDS.py
 ## Work with a data folder
 You will need a folder with your data organized as follow:
 ```
-You_data_folder |
-                |_ images |
-                          |_ data_image_01.png
-                          |_ data_image_02.png
-                          |_ ... ...
-                |_ labels |
-                          |_ data_image_01.txt
-                          |_ data_image_02.txt
-                          |_ ... ...
+You_data_folder_
+                |_ images _
+                           |_ data_image_01.png
+                           |_ data_image_02.png
+                           |_ ... ...
+                |_ labels _
+                           |_ data_image_01.txt
+                           |_ data_image_02.txt
+                           |_ ... ...
 ```
 Go to *Load* -> *Active learning output* to load such folder. You label are expected to be in COCO format:
 ```
@@ -48,3 +59,12 @@ Go to *Load* -> *Active learning output* to load such folder. You label are expe
 You can open a existing task by open the JSON task file by *Task* -> *Open* \
 Or start a new task using the new task wizard: *Task* -> *New* \
 When in task, opening a data will automatically mark it as *finished* and the data background turns grey. Double click a data to mark it as *unfinished* 
+### yaml file
+The program expect a yaml file in YOLO format. Class names are expected to organized like:
+```yml
+name: ['name0', 'name1', ... ]
+```
+# Know problems
+- In some file/directory dialogs, not selecting anything might cause error, but nothing show stopper yet
+- Opening a new folder/task after working on a different task can cause errors. For now always restart the program if you are to open a new folder/task
+- PLEASE let me know if you found any problem with the program

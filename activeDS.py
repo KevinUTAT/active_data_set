@@ -26,7 +26,9 @@ import shutil
 import yaml
 from bbox import BBox
 from dataScene import DataScene
-from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBEL_FOLDER
+from ADS_config import (label_table, modification_list, IMG_FOLDER, 
+                        IMG_EXT, LEBEL_FOLDER, DEFAULT_CLS)
+import ADS_config
 from ImgScene import ImgScene
 import train_val_spliter
 import rename
@@ -87,6 +89,10 @@ class Form(QObject):
         # check labels
         self.window.findChild(QAction, 'actionCheck_Labels').\
             triggered.connect(self.check_labels_integrity)
+
+        # set defult class
+        self.window.findChild(QAction, 'actionset_defult_class').\
+            triggered.connect(self.set_defult_class)
 
         # For task ------------------------------------------------------
 
@@ -598,6 +604,42 @@ class Form(QObject):
                     if len(line_segs) > 5:
                         print(f"Line error in: {label}")
                         break
+
+
+    def set_defult_class(self):
+        # if yaml is provided (ex: in task)
+        if hasattr(self, 'class_map'):
+            class_list = []
+            for cls_idx, cls_name in self.class_map.items():
+                class_list.append(f"{cls_idx}-{cls_name}")
+            # show a dialog
+            dialog = QInputDialog()
+            label_text = "Input the correct class number.\n"\
+                "Please note your input will not be checked for legality"
+            item, okPressed = \
+                QInputDialog.getItem(dialog, \
+                "Edit class", \
+                label_text, \
+                class_list, False)
+            # print(text, okPressed)
+            if okPressed and item:
+                class_idx = int(item.split('-')[0])
+                self.current_dataScene.last_cls = class_idx
+                ADS_config.DEFAULT_CLS = class_idx
+                
+        else:
+            dialog = QInputDialog()
+            label_text = "Input the correct class number.\n"\
+                "Please note your input will not be checked for legality"
+            text, okPressed = \
+                QInputDialog.getText(dialog, \
+                "Edit class", \
+                label_text, \
+                QLineEdit.Normal)
+
+            if okPressed and text != '':
+                self.current_dataScene.last_cls = int(text)
+                ADS_config.DEFAULT_CLS = int(text)
 
 
     # helpers ++++++++++++++++++++++++++++++++++++++++++++++++

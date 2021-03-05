@@ -134,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>1177</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuLoad">
@@ -160,6 +160,7 @@
     <addaction name="actionData_spliter"/>
     <addaction name="actionRename"/>
     <addaction name="actionCheck_Labels"/>
+    <addaction name="actionset_defult_class"/>
    </widget>
    <widget class="QMenu" name="menuTask">
     <property name="title">
@@ -229,6 +230,11 @@
   <action name="actionCheck_Labels">
    <property name="text">
     <string>Check Labels</string>
+   </property>
+  </action>
+  <action name="actionset_defult_class">
+   <property name="text">
+    <string>Set defult class</string>
    </property>
   </action>
  </widget>

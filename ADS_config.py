@@ -16,3 +16,5 @@ label_table = {}
 # to delete a image-label pair set target_idx to -1
 # to add a new target, set old_date to None
 modification_list = []
+
+DEFAULT_CLS = 0

@@ -18,7 +18,9 @@ from PySide2.QtGui import (QIcon, QPixmap, QImage)
 
 from PIL import Image
 from bbox import BBox
-from ADS_config import label_table, modification_list, IMG_FOLDER, IMG_EXT, LEBEL_FOLDER
+from ADS_config import (label_table, modification_list, IMG_FOLDER, 
+                        IMG_EXT, LEBEL_FOLDER, DEFAULT_CLS)
+import ADS_config
 
 
 # A DataScene handles the displaying of a single data (a image and a lable file)
@@ -33,7 +35,7 @@ class DataScene(object):
         self.data_name = data_name
         self.current_data_dir = current_data_dir
 
-        self.last_cls = 0
+        self.last_cls = ADS_config.DEFAULT_CLS
 
         self.cls_map = cls_map
 
