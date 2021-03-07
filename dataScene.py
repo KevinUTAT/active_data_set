@@ -47,10 +47,10 @@ class DataScene(object):
     def show(self, highlight=-1):
         # load viwer and the target list
         self.viewerScene.clear()
-        img = QPixmap(self.img_dir)
-        w, h = img.size().toTuple()
+        self.img = QPixmap(self.img_dir)
+        w, h = self.img.size().toTuple()
         self.backgroundSize = [w, h]
-        self.viewerScene.addPixmap(img)
+        self.viewerScene.addPixmap(self.img)
 
         # reinitialize the target list
         self.targetList.clear()

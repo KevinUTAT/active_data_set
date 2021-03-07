@@ -121,7 +121,7 @@ class BBox(object):
         self.left = int(self.xywh[0] - self.xywh[2]/2)
         self.right = int(self.xywh[0] + self.xywh[2]/2)
 
-
+    # Not used, it makes very little difference
     def reorder(self):
         # after moving anckers, its positional order might
         # be wrong (ex: self.tl is moved to bottom right 

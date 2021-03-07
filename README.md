@@ -31,7 +31,7 @@ First install python >= 3.8 or Anaconda and install dependency in requirements.t
 ```
 conda create --name <envname> --file requirements.txt
 ```
-If ypu don't want to use conda, you need to modify requirements.txt to match pip install. \
+If ypu don't want to use conda, you need to modify requirements.txt to match ```pip install```. \
 Once dependencies are installed, run the tool:
 ```
 python activeDS.py
