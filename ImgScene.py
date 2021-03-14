@@ -36,10 +36,11 @@ class ImgScene(QGraphicsScene):
 
     def mouseMoveEvent(self, event):
         super().mouseMoveEvent(event)
+        x = event.scenePos().x()
+        y = event.scenePos().y()
         # at the begaining of a click & drag: create a new bbox
         if self.mouseDown and (not self.targetCreated):
-            x = event.scenePos().x()
-            y = event.scenePos().y()
+            # if started outside the img, don't create nothing
             if (0 > x) or (0 > y) or (x > self.dscene.img.size().toTuple()[0]) \
                 or (y > self.dscene.img.size().toTuple()[1]):
                 self.mouseDown = False
@@ -56,12 +57,17 @@ class ImgScene(QGraphicsScene):
         # pass the mouse event to the botton right ancker so a bbox 
         # can be dragged out
         elif self.mouseDown:
+            # if bbox is dragged to the edge, stop draging and rectify the bbox
+            if (0 > x) or (0 > y) or (x > self.dscene.img.size().toTuple()[0]) \
+                or (y > self.dscene.img.size().toTuple()[1]):
+                return
             self.newBboxes[-1].br.mouseMoveEvent(event, \
                 passed_by_scene=True)
 
 
     def mouseReleaseEvent(self, event):
         super().mouseReleaseEvent(event)
+        # if a bbox was dragged out, save it 
         if self.mouseDown:
             self.mouseDown = False
             self.targetCreated = False
