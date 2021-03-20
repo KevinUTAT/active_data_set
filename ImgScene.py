@@ -41,8 +41,8 @@ class ImgScene(QGraphicsScene):
         # at the begaining of a click & drag: create a new bbox
         if self.mouseDown and (not self.targetCreated):
             # if started outside the img, don't create nothing
-            if (0 > x) or (0 > y) or (x > self.dscene.img.size().toTuple()[0]) \
-                or (y > self.dscene.img.size().toTuple()[1]):
+            if (0 > x) or (0 > y) or (x > self.dscene.backgroundSize[0]) \
+                or (y > self.dscene.backgroundSize[1]):
                 self.mouseDown = False
                 return
             newBbox = BBox([x, y, 0, 0],
@@ -58,8 +58,8 @@ class ImgScene(QGraphicsScene):
         # can be dragged out
         elif self.mouseDown:
             # if bbox is dragged to the edge, stop draging and rectify the bbox
-            if (0 > x) or (0 > y) or (x > self.dscene.img.size().toTuple()[0]) \
-                or (y > self.dscene.img.size().toTuple()[1]):
+            if (0 > x) or (0 > y) or (x > self.dscene.backgroundSize[0]) \
+                or (y > self.dscene.backgroundSize[1]):
                 return
             self.newBboxes[-1].br.mouseMoveEvent(event, \
                 passed_by_scene=True)
@@ -73,3 +73,5 @@ class ImgScene(QGraphicsScene):
             self.targetCreated = False
             self.newBboxes[-1].update()
             self.dscene.record_new_target(self.newBboxes[-1])
+
+

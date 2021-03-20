@@ -34,6 +34,7 @@ import train_val_spliter
 import rename
 from newTask import NewTask
 from task import Task
+import label_health
 # import detect
 
 
@@ -596,14 +597,13 @@ class Form(QObject):
 
 
     def check_labels_integrity(self):
-        for label in os.listdir(self.adc_folder_dir + LEBEL_FOLDER):
-            with open(self.adc_folder_dir + LEBEL_FOLDER \
-                + "/" + label) as label_file:
-                for line in label_file:
-                    line_segs = line.split()
-                    if len(line_segs) > 5:
-                        print(f"Line error in: {label}")
-                        break
+        # check for line error
+        line_err_list = label_health.check_for_missing_newline(\
+            self.adc_folder_dir)
+        if len(line_err_list) > 0:
+            self.info_msg_box("Error found in labels: missing newline", \
+                title="Line error", detail_list=line_err_list)
+
 
 
     def set_defult_class(self):
@@ -682,6 +682,21 @@ class Form(QObject):
         error_window.setIcon(QMessageBox.Information)
         error_window.setText(info_msg)
         error_window.setWindowTitle(title)
+        error_window.setStandardButtons(QMessageBox.Ok)
+        error_window.exec_()
+
+
+    # infomation popup with a textbox display an array of detail
+    def info_msg_box(self, info_msg, title='Information', detail_list=[]):
+        details = ""
+        if len(detail_list) > 0:
+            for detail in detail_list:
+                details += str(detail) + '\n'
+        error_window = QMessageBox()
+        error_window.setIcon(QMessageBox.Information)
+        error_window.setText(info_msg)
+        error_window.setWindowTitle(title)
+        error_window.setDetailedText(details)
         error_window.setStandardButtons(QMessageBox.Ok)
         error_window.exec_()
 
