@@ -67,4 +67,6 @@ name: ['name0', 'name1', ... ]
 # Know problems
 - In some file/directory dialogs, not selecting anything might cause error, but nothing show stopper yet
 - Opening a new folder/task after working on a different task can cause errors. For now always restart the program if you are to open a new folder/task
+- Label out of range. It is possible to label an image with bbox that is out of the size of the image.
+- A combination of actions can cause a bbox to be created twice
 - PLEASE let me know if you found any problem with the program
