@@ -603,6 +603,12 @@ class Form(QObject):
         if len(line_err_list) > 0:
             self.info_msg_box("Error found in labels: missing newline", \
                 title="Line error", detail_list=line_err_list)
+        # check for out-of-range
+        oor_err_list = label_health.check_out_of_range(\
+            self.adc_folder_dir)
+        if len(oor_err_list) > 0:
+            self.info_msg_box("Error found in labels: out-of-range", \
+                title="OOR error", detail_list=oor_err_list)
 
 
 
