@@ -451,7 +451,7 @@ class Form(QObject):
 
 
     def show_mods(self):
-        table = ""
+        table = []
         for mod in modification_list:
             line = ""
             if mod[1] == -1:
@@ -465,9 +465,16 @@ class Form(QObject):
                 else:
                     line += "MT: "
             line += str(mod) + '\n'
-            table += line
-        self.info_msg(table,\
-            "Chnage History")
+            table.append(line)
+        # add many spaces to make the window wider
+        self.info_msg_box(\
+            f"Total of {len(table)} modifications:"\
+            "                                     "\
+            "                                     "\
+            "                                     "\
+            "                                     ", \
+            title="Unsaved Modification", \
+            detail_list=table)
 
 
     def save_active_to(self):
