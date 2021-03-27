@@ -57,10 +57,6 @@ class ImgScene(QGraphicsScene):
         # pass the mouse event to the botton right ancker so a bbox 
         # can be dragged out
         elif self.mouseDown:
-            # if bbox is dragged to the edge, stop draging and rectify the bbox
-            if (0 > x) or (0 > y) or (x > self.dscene.backgroundSize[0]) \
-                or (y > self.dscene.backgroundSize[1]):
-                return
             self.newBboxes[-1].br.mouseMoveEvent(event, \
                 passed_by_scene=True)
 
@@ -71,7 +67,7 @@ class ImgScene(QGraphicsScene):
         if self.mouseDown:
             self.mouseDown = False
             self.targetCreated = False
-            self.newBboxes[-1].update()
+            self.newBboxes[-1].update(verify=True)
             self.dscene.record_new_target(self.newBboxes[-1])
 
 

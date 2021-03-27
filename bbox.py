@@ -101,11 +101,14 @@ class BBox(object):
             self.br.abs_scenePos_center().y())
 
 
-    def update(self):
+    def update(self, verify=True):
         # update bbox to anckers (after moving)
 
         self.restore_pt = \
             BBox(self.xywh, self.imgSizeWH, self.cls)
+        # verify if the bbox is out of img rang
+        if verify:
+            self.verify_n_correct()
 
         self.xywh[0] = \
             (self.tl.centerX() + self.tr.centerX()) / 2
@@ -120,6 +123,34 @@ class BBox(object):
         self.bottom = int(self.xywh[1] + self.xywh[3]/2) 
         self.left = int(self.xywh[0] - self.xywh[2]/2)
         self.right = int(self.xywh[0] + self.xywh[2]/2)
+
+    # Verify and correct the bbox if out-of-range of img
+    def verify_n_correct(self):
+        # check all four side for out-of-range
+        # if its not, move/resize it to the border
+        # here we only need to check two apposing anckers
+        # because the other two will follow 
+
+        # out-of-range left
+        if self.tl.centerX() < 0:
+            self.tl.setCenterX(0)
+        if self.br.centerX() < 0:
+            self.br.setCenterX(0)
+        # out-of-range top
+        if self.tl.centerY() < 0:
+            self.tl.setCenterY(0)
+        if self.br.centerY() < 0:
+            self.br.setCenterY(0)
+        # put-of-range right
+        if self.tl.centerX() > self.imgSizeWH[0]:
+            self.tl.setCenterX(self.imgSizeWH[0])
+        if self.br.centerX() > self.imgSizeWH[0]:
+            self.br.setCenterX(self.imgSizeWH[0])
+        # out-of-range botton
+        if self.tl.centerY() > self.imgSizeWH[1]:
+            self.tl.setCenterY(self.imgSizeWH[1])
+        if self.br.centerY() > self.imgSizeWH[1]:
+            self.br.setCenterY(self.imgSizeWH[1])
 
 
     # Not used, it makes very little difference

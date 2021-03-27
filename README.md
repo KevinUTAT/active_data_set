@@ -10,8 +10,14 @@ All your changes are saved in a data structure as changes, this allows two thing
 - You can undo you modification with ease. It just have to remove an entry in the data structure.
 - Your changes will not write to your labels only if you explicitly do so. 
 # Change log
+### 2021-03-27
+- To address the problem with have bounding box (BBox) outside of the image:
+  1. You can no longer create a BBox starting outside of the image now
+  2. You can, still drag a BBox to outside of the image, but it will be moved to the nearest border. This make marking target on the edge easier:\
+   ![](doc/OOR.png) >>> ![](doc/OOR_fix.png)
+  3. To verify your existing labels not have anything out-of-range, *Tool -> Check labels* will also check that for you
 ### 2021-03-05
-- Task system will except a yaml file for class names.
+- Task system will accept a yaml file for class names.
 - Re-do interface for editing target class. Now use a drop down menu if a ymal file is loaded.
 - Now you can set a default class. Simplify steps when only added one class to data set
 - Fix a bug when working with outside labels, newline are not added to the end
