@@ -3,3 +3,5 @@ __pycache__
 *.jpg
 *.mp4
 .vscode
+!doc/OOR.png
+!doc/OOR_fix.png
