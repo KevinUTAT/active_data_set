@@ -224,8 +224,11 @@ class Form(QObject):
 
                     label_table[dataName] = bboxs
             else:
-                self.error_msg("Cannot find label: " + \
-                    label_dir)
+                # self.error_msg("Cannot find label: " + \
+                #     label_dir)
+                # if the label do not exist, create an empty bbox list
+                bboxs = []
+                label_table[dataName] = bboxs
             
             self.dataList.addItem(newItem)
             if progressBar:
@@ -351,7 +354,7 @@ class Form(QObject):
             + "Save -> Target modifications")
 
         if self.dataList.isItemSelected(data_item):
-             # foucus on a different data 
+             # focus on a different data 
             if data_idx < (self.dataList.count()-1):
                 self.dataList.setCurrentRow(data_idx + 1)
             else:
@@ -417,6 +420,10 @@ class Form(QObject):
                     + '/' + mod[0] + '.txt'
             img_dir = self.current_data_dir + IMG_FOLDER \
                     + '/' + mod[0] + '.' + IMG_EXT
+            # if the label file don't exist, create an empty file
+            if not os.path.exists(label_dir):
+                with open(label_dir, 'w'):
+                    pass
             # remove a img
             if mod[1] == -1:
                 os.remove(img_dir)

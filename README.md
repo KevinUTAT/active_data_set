@@ -72,7 +72,9 @@ name: ['name0', 'name1', ... ]
 ```
 # Know problems
 - In some file/directory dialogs, not selecting anything might cause error, but nothing show stopper yet
+- If click the viewer when there is no image loaded, error is thrawed, nothing show stopper.
 - Opening a new folder/task after working on a different task can cause errors. For now always restart the program if you are to open a new folder/task
-- Label out of range. It is possible to label an image with bbox that is out of the size of the image.
-- A combination of actions can cause a bbox to be created twice
-- PLEASE let me know if you found any problem with the program
+- ~~Label out of range. It is possible to label an image with bbox that is out of the size of the image.~~
+- ~~A combination of actions can cause a bbox to be created twice~~
+- In some rear cases, resizing a BBox resulting the old BBox not being removed, this seems to only be a drawing issue, not effecting the underline labeling logic.
+- **PLEASE let me know if you found any problem with the program**

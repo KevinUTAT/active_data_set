@@ -63,8 +63,8 @@ class ImgScene(QGraphicsScene):
 
     def mouseReleaseEvent(self, event):
         super().mouseReleaseEvent(event)
-        # if a bbox was dragged out, save it 
-        if self.mouseDown:
+        # if a new bbox was dragged out, save it 
+        if self.mouseDown and self.targetCreated:
             self.mouseDown = False
             self.targetCreated = False
             self.newBboxes[-1].update(verify=True)
