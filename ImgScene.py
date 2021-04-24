@@ -5,7 +5,7 @@ import PySide2
 import copy
 from PySide2.QtWidgets import (QGraphicsScene)
 from PySide2.QtGui import (QBrush, QPen, QFont)
-from PySide2.QtCore import QLineF, QPointF
+from PySide2.QtCore import QLineF, QPointF, Qt
 from bbox import BBox
 
 
@@ -28,7 +28,8 @@ class ImgScene(QGraphicsScene):
 
     def mousePressEvent(self, event):
         super().mousePressEvent(event)
-        self.mouseDown = True
+        if event.button() == Qt.LeftButton:
+            self.mouseDown = True
 
         # print(type(self.height()))
         # print(self.height())

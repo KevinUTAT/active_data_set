@@ -5,3 +5,4 @@ __pycache__
 .vscode
 !doc/OOR.png
 !doc/OOR_fix.png
+test.json
