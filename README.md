@@ -77,4 +77,5 @@ name: ['name0', 'name1', ... ]
 - ~~Label out of range. It is possible to label an image with bbox that is out of the size of the image.~~
 - ~~A combination of actions can cause a bbox to be created twice~~
 - In some rear cases, resizing a BBox resulting the old BBox not being removed, this seems to only be a drawing issue, not effecting the underline labeling logic.
+- Right click errors.
 - **PLEASE let me know if you found any problem with the program**
