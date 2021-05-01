@@ -4,7 +4,7 @@ import os.path
 import PySide2
 import copy
 from PySide2.QtWidgets import (QGraphicsScene, 
-                        QGraphicsRectItem)
+                        QGraphicsRectItem, QMenu)
 from PySide2.QtGui import (QBrush, QPen, QFont)
 from PySide2.QtCore import QLineF, QPointF
 
@@ -58,6 +58,27 @@ class Ancker(QGraphicsRectItem):
         # self.bbox.reorder()
         # print(self.bbox.to_label_str())
         self.bbox.dScene.record_target_pos(self.bbox.target_idx)
+
+
+    def contextMenuEvent(self, event):
+        menu = QMenu()
+        if len(self.bbox.dScene.cls_map) > self.bbox.cls:
+            cls_action = menu.addAction(\
+                str(self.bbox.cls) + ": " +\
+                self.bbox.dScene.cls_map[self.bbox.cls])
+        else:
+            cls_action = menu.addAction(\
+                str(self.bbox.cls) + ": " + "Unknow")
+        menu.addSeparator()
+        edit_action = menu.addAction("Edit Class")
+        edit_action.triggered.connect(\
+            lambda state=0, x=self.bbox.target_idx: \
+            self.bbox.dScene.edit_target_class(x))
+        rm_action = menu.addAction("Remove")
+        rm_action.triggered.connect(\
+            lambda state=0, x=self.bbox.target_idx: \
+            self.bbox.dScene.ui_form.remove_target(x))
+        menu.exec_(event.screenPos())
 
 
     # Anckers has no parents, there for the origin is the initial

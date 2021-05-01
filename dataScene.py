@@ -92,9 +92,11 @@ class DataScene(object):
         self.viewerScene.update()
 
 
-    def edit_target_class(self):
+    def edit_target_class(self, target_idx=-1):
         # findout which target is selected first
-        target_idx = self.targetList.currentRow()
+        print(target_idx)
+        if target_idx < 0:
+            target_idx = self.targetList.currentRow()
         
         # if yaml is provided (ex: in task)
         if len(self.cls_map) > 0:

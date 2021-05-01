@@ -78,5 +78,5 @@ name: ['name0', 'name1', ... ]
 - ~~A combination of actions can cause a bbox to be created twice~~
 - An error with error msg of "C++ object (Ancker) already deleted":
   - In some rear cases, resizing a BBox resulting the old BBox not being removed, this seems to only be a drawing issue, not effecting the underline labeling logic.
-  - Right click errors.
+  - ~~Right click errors.~~
 - **PLEASE let me know if you found any problem with the program**

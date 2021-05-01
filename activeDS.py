@@ -140,14 +140,16 @@ class Form(QObject):
 
         self.rmTargetButton.setEnabled(False)
         self.undoButton.setEnabled(False)
-        self.rmTargetButton.clicked.connect(self.remove_target)
+        self.rmTargetButton.clicked.connect(\
+            lambda state=0, x=-1:\
+            self.remove_target(x))
         self.targetList_modified = False
         self.undoButton.clicked.connect(self.undo_mod)
         self.deleteButton.clicked.connect(self.remove_img)
 
         # shortcuts ====================================================
         QShortcut(QKeySequence("Ctrl+R"), self.window).activated.\
-            connect(self.remove_target)
+            connect(lambda state=0, x=-1: self.remove_target(x))
 
         self.window.show()
 
@@ -276,9 +278,11 @@ class Form(QObject):
         # setup edit trigger (double click or edit button)
         if not self.editButton_connected:
             self.targetList.itemDoubleClicked.connect(\
-                self.current_dataScene.edit_target_class)
+                lambda state=0, x=-1:\
+                self.current_dataScene.edit_target_class(x))
             self.editButton.clicked.connect(\
-                self.current_dataScene.edit_target_class)
+                lambda state=0, x=-1:\
+                self.current_dataScene.edit_target_class(x))
             self.editButton_connected = True
         else:
             self.targetList.itemDoubleClicked.disconnect()
@@ -318,8 +322,9 @@ class Form(QObject):
         self.rmTargetButton.setEnabled(True)
 
 
-    def remove_target(self):
-        target2rm_idx = self.targetList.currentRow()
+    def remove_target(self, target2rm_idx=-1):
+        if target2rm_idx < 0:
+            target2rm_idx = self.targetList.currentRow()
         data_name = str(self.dataList.currentItem().text())
         # delete one bbox from label_table[data_name]
         new_bboxs = []
