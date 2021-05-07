@@ -94,7 +94,6 @@ class DataScene(object):
 
     def edit_target_class(self, target_idx=-1):
         # findout which target is selected first
-        print(target_idx)
         if target_idx < 0:
             target_idx = self.targetList.currentRow()
         

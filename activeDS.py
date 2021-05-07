@@ -34,6 +34,7 @@ import train_val_spliter
 import rename
 from newTask import NewTask
 from task import Task
+from interfacewindow import InterfaceWindow
 import label_health
 # import detect
 
@@ -46,8 +47,11 @@ class Form(QObject):
         ui_file.open(QFile.ReadOnly)
         
         loader = QUiLoader()
+        loader.registerCustomWidget(InterfaceWindow)
         self.window = loader.load(ui_file)
         ui_file.close()
+
+        
 
         # system flags
         self.current_data_dir = "."
