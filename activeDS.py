@@ -124,7 +124,7 @@ class Form(QObject):
         # Targets list ==================================================
         self.targetList = \
             self.window.findChild(QListWidget, 'targetList')
-        self.targetList.itemSelectionChanged.connect(self.hightlight_target)
+        self.targetList.itemClicked.connect(self.hightlight_target)
         # self.current_dataScene = DataScene(self.viewerScene, \
         #     self.viewerView, self.targetList)
         # self.targetList.itemDoubleClicked.connect(\

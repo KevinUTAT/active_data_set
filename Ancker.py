@@ -22,6 +22,14 @@ class Ancker(QGraphicsRectItem):
         self.xywh = [x, y, w, h] # x, y is TL corner
 
 
+    def mousePressEvent(self, event):
+        super().mousePressEvent(event)
+        self.hightlight_target()
+        # if the mouse press is meant for an ancker, 
+        # than it should not be handled by the scene
+        self.bbox.currentScene.mouseEventHandled = True
+
+
     def mouseMoveEvent(self, event, passed_by_scene=False):
         super().mouseMoveEvent(event)
 
@@ -135,3 +143,13 @@ class Ancker(QGraphicsRectItem):
         else:
             print("Ancker Error: Unknown type " + self.atype)
         self.bbox.redraw_lines_by_anckers()
+
+
+    # highlighting this target in the target list
+    def hightlight_target(self):
+        # idx in target list of the target this ancker is in
+        target_idx = self.bbox.target_idx
+        # reference to the target list (a QListWidget)
+        ref_targetList = self.bbox.dScene.targetList
+
+        ref_targetList.setCurrentRow(target_idx)

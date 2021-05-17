@@ -14,8 +14,10 @@ class ImgScene(QGraphicsScene):
     def __init__(self, parent):
         super().__init__(parent)
         
+        # internal flags for mouse event sync
         self.mouseDown = False
         self.targetCreated = False
+        self.mouseEventHandled = False
         self.newBboxes = []
 
 
@@ -27,9 +29,12 @@ class ImgScene(QGraphicsScene):
     # we need to intercept the floowing three events
 
     def mousePressEvent(self, event):
+        self.mouseEventHandled = False
         super().mousePressEvent(event)
-        if event.button() == Qt.LeftButton:
+        if (event.button() == Qt.LeftButton) \
+            and (not self.mouseEventHandled):
             self.mouseDown = True
+        self.mouseEventHandled = False
 
         # print(type(self.height()))
         # print(self.height())
@@ -70,5 +75,7 @@ class ImgScene(QGraphicsScene):
             self.targetCreated = False
             self.newBboxes[-1].update(verify=True)
             self.dscene.record_new_target(self.newBboxes[-1])
+        else:
+            self.mouseDown = False
 
 
