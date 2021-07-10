@@ -606,7 +606,7 @@ class Form(QObject):
         msgBox.setDefaultButton(QMessageBox.Ok)
         ret = msgBox.exec()
         if ret == QMessageBox.Ok:
-            train_val_spliter.train_val_split()
+            train_val_spliter.train_val_split(data_dir=self.adc_folder_dir)
         else:
             return
 

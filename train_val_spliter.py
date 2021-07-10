@@ -1,15 +1,19 @@
 import glob
 import os
+import os.path
 import numpy as np
 import sys
 
-current_dir = "./data/data/player/images"
-img_dir = "./data/player/images"
-split_pct = 10  # 10% validation set
 
-def train_val_split():
-    file_train = open("data/train.txt", "w")  
-    file_val = open("data/val.txt", "w")  
+# 10% validation set
+def train_val_split(data_dir="./data/data/player", split_pct=10):
+    current_dir = data_dir + "/images"
+    img_dir = "./data/player/images"
+
+    split_dir = os.path.split(os.path.split(data_dir)[0])[0]
+
+    file_train = open(split_dir + "/train.txt", "w")  
+    file_val = open(split_dir + "/val.txt", "w")
     counter = 1  
     index_test = round(100 / split_pct)  
     for fullpath in glob.iglob(os.path.join(current_dir, "*.png")):  
