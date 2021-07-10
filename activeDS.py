@@ -464,6 +464,9 @@ class Form(QObject):
                 with open(label_dir, 'w') as label_file:
                     label_file.writelines(lines)
         modification_list.clear()
+        # save the prograss as well
+        if self.in_task:
+            self.current_task.save_current()
 
 
     def show_mods(self):

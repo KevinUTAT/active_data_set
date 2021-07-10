@@ -20,8 +20,8 @@ class Task(object):
             return
         self.finished_data.append(data_name)
         self.json_doc["Finished Data"] = self.finished_data
-        with open(self.dir, 'w') as out_json:
-            out_json.write(json.dumps(self.json_doc, indent=4))
+        # with open(self.dir, 'w') as out_json:
+        #     out_json.write(json.dumps(self.json_doc, indent=4))
 
 
     # remove marking of finished for a data
@@ -30,11 +30,11 @@ class Task(object):
             return
         self.finished_data.remove(data_name)
         self.json_doc["Finished Data"] = self.finished_data
-        with open(self.dir, 'w') as out_json:
-            out_json.write(json.dumps(self.json_doc, indent=4))
+        # with open(self.dir, 'w') as out_json:
+        #     out_json.write(json.dumps(self.json_doc, indent=4))
 
 
-    def __del__(self):
+    def save_current(self):
         # when destroyed, update the file
         self.json_doc["Data Location"] = self.data_location
         self.json_doc["Yaml Location"] = self.yaml_location
