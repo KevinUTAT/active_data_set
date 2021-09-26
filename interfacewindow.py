@@ -19,6 +19,15 @@ class InterfaceWindow(QMainWindow):
         else:
             event.ignore()
 
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.reload_view()
+
+
+    def set_reload_ref(self, reload_ref):
+        self.reload_view = reload_ref
+
     
     def exit_prompt(self):
         error_window = QMessageBox()

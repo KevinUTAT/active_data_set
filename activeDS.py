@@ -50,6 +50,7 @@ class Form(QObject):
         loader.registerCustomWidget(InterfaceWindow)
         self.window = loader.load(ui_file)
         ui_file.close()
+        self.window.set_reload_ref(self.reload_viewer)
 
         
 
@@ -57,7 +58,7 @@ class Form(QObject):
         self.current_data_dir = "."
 
         # new task window
-        self.in_task = False # indicating its currently performing a task
+        self.in_task = False # indicating its currently performing a Task
         self.newTaskWin = NewTask(ui_file='newtaskwindow.ui')
 
         # Menu actions ==================================================
@@ -301,21 +302,8 @@ class Form(QObject):
 
     def reload_viewer(self, highlight=-1):
         # # Same as load_viewer but without loading the target list
-        # self.viewerScene.clear()
-        # data_name = str(self.dataList.currentItem().text())
-        # img_dir = self.current_data_dir + IMG_FOLDER \
-        #     + '/' + data_name + '.' + IMG_EXT
-        # img = QPixmap(img_dir)
-        # w, h = img.size().toTuple()
-        # self.viewerScene.addPixmap(img)
-        # for i, one_box in enumerate(label_table[data_name]):
-        #     if highlight == i:
-        #         one_box.drew_in_scene(self.viewerScene, highlight=True)
-        #     else:
-        #         one_box.drew_in_scene(self.viewerScene)
-        # self.viewerView.fitInView(QRectF(0, 0, w, h), Qt.KeepAspectRatio)
-        # self.viewerScene.update()
-        self.current_dataScene.update_viewer(highlight=highlight)
+        if hasattr(self, "current_dataScene"):
+            self.current_dataScene.update_viewer(highlight=highlight)
 
 
     def hightlight_target(self):
