@@ -3,7 +3,8 @@
 This little tool is build to manage data sets for learning. It currently supports COCO style annotation and its tested with some of my YOLO projects that you can find here: [RPANet](https://github.com/KevinUTAT/RPANet), [Surviver.IO](https://github.com/KevinUTAT/surviver_dot_IO) \
 The focus of this tool is *active learning*, by providing simple work flow of editing existing annotations that maybe generated through active learning. \
 The current build supports loading a existing datasets with images and labels and allows you to edit, delete and add new annotations.\
-The tools is light weight and build with Python and PySide2 framework.
+The tools is light weight and build with Python and PySide2 framework.\
+![](doc/ADS.png)
 ## Approach
 This program treats your data cautiously. \
 All your changes are saved in a data structure as changes, this allows two things:

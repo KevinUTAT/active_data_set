@@ -5,6 +5,7 @@ from ADS_config import (label_table, modification_list, IMG_FOLDER,
                         IMG_EXT, LEBEL_FOLDER, DEFAULT_CLS)
 
 # provide the main user interface of the program
+# this class are mostly used to intercept mainwindow signals (exit, resize)
 class InterfaceWindow(QMainWindow):
     def __init__(self, parent=None, flags=Qt.WindowFlags()):
         super().__init__(parent, flags)

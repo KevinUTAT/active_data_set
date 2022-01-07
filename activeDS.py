@@ -204,7 +204,7 @@ class Form(QObject):
                 img = Image.open(self.current_data_dir + IMG_FOLDER \
                     + '/' + dataName + '.' + IMG_EXT)
                 w, h = img.size
-                img = img.resize((int(w/20), int(h/20)))
+                img = img.resize((128, int(128*h/w)))
                 img = img.convert("RGBA")
                 qimg = QImage(img.tobytes('raw', 'RGBA'), img.size[0], \
                     img.size[1], QImage.Format_RGBA8888)
